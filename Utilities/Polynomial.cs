@@ -18,7 +18,6 @@ public class Polynomial
         Coefficients = generateCoefficients(degree, field);
     }
 
-    
     // Gets the Y value associated with X from the polynomial
     public BigInteger GetYFromX(BigInteger x)
     {
@@ -28,10 +27,12 @@ public class Polynomial
 
         return y;
     }
+
     // Returns the secret
     public static BigInteger GetBaseValueFromPoints(Point[] points, int degree) => 
         LagrangeInterpolation(points, 0, degree);
     
+
     // Generates a random BigInteger value for each coefficient in an array where array[0] corresponds to x^1, array[1] to x^2 etc.
     private BigInteger[] generateCoefficients(int degree, BigInteger field)
     {
