@@ -31,6 +31,7 @@ if(debug)
 Console.WriteLine("-------------------- RETRIEVING THE SECRET FROM 3 SHARES FROM PROJECT DESCRIPTION ------------------------");
 
 // Creating the points; Assuming share_i is equal to Point(i, share_i)
+// Here we assume that the secret is stored in a 2-degree polynomial, as we only get 3 points
 Point p1 = new Point(1, share1);
 Point p2 = new Point(2, share2);
 Point p4 = new Point(4, share4);
@@ -42,6 +43,7 @@ Console.WriteLine($"The secret is: {secret}");
 
 Console.WriteLine("-------------------- TESTING OUR IMPLEMENTATION OUT WITH OWN VALUES ------------------------");
 //Testing that our implementation works
+// Using Int64 to not fill up the entire terminal
 BigInteger new_secret = random.NextInt64();
 var neededShares = 3; 
 Console.WriteLine($"Randomly generated secret: {new_secret}, shares needed to retrieve secret: {neededShares}");
