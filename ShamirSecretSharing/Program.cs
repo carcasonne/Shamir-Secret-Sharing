@@ -38,13 +38,14 @@ Point p4 = new Point(4, share4);
 Point[] points = {p1, p2, p4};
 
 // Retrieves the secret
-var secret = Polynomial.GetBaseValueFromPoints(points, 2);
+var secret = Polynomial.GetBaseValueFromPoints(points, 2, field);
 Console.WriteLine($"The secret is: {secret}");
 
 Console.WriteLine("-------------------- TESTING OUR IMPLEMENTATION OUT WITH OWN VALUES ------------------------");
 //Testing that our implementation works
 // Using Int64 to not fill up the entire terminal
-BigInteger new_secret = random.NextInt64();
+BigInteger new_secret = random.NextInt64(); // small number
+new_secret = field.GetRandomIntegerBelow(); // big number 
 var neededShares = 3; 
 Console.WriteLine($"Randomly generated secret: {new_secret}, shares needed to retrieve secret: {neededShares}");
 var polynomial = new Polynomial(new_secret, neededShares - 1, field);
@@ -53,7 +54,7 @@ Point new_point2 = new Point(2, polynomial.GetYFromX(2));
 Point new_point3 = new Point(3, polynomial.GetYFromX(3));
 Point[] new_points = {new_point1, new_point2, new_point3};
 
-var new_reconstruction = Polynomial.GetBaseValueFromPoints(new_points, 2);
+var new_reconstruction = Polynomial.GetBaseValueFromPoints(new_points, 2, field);
 Console.WriteLine($"Secret should be {new_secret}; Reconstructed Secret is = {new_reconstruction}");
 Console.WriteLine($"Is equal: {new_secret == new_reconstruction}");
 

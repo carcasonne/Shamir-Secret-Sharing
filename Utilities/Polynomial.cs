@@ -4,11 +4,11 @@ using System;
 using Utilities.Extensions;
 
 public class Polynomial 
-{
-    public BigInteger BaseValue {get; set;}
+{   
+    public BigInteger BaseValue {get; set;} // The polynomial coefficient for x^0
     public int Degree;
     public BigInteger Field {get; set;}
-    public BigInteger[] Coefficients {get; set; }
+    public BigInteger[] Coefficients {get; set; } // coefficients where array[0] corresponds to x^1, array[1] to x^2 etc.
 
     public Polynomial(BigInteger baseValue, int degree, BigInteger field) 
     {
@@ -23,17 +23,17 @@ public class Polynomial
     {
         var y = BaseValue;
         for(int i = 0; i < Coefficients.Length; i++)
-            y += Coefficients[i] * BigInteger.Pow(x, i + 1);
+            y += Coefficients[i] * (BigInteger.Pow(x, i + 1) % Field); // Modulo to stay in group
 
         return y;
     }
 
-    // Returns the secret
-    public static BigInteger GetBaseValueFromPoints(Point[] points, int degree) => 
-        LagrangeInterpolation(points, 0, degree);
+    // Returns the base value for some points on some polynomial of degree 'degree' under field 'field'
+    public static BigInteger GetBaseValueFromPoints(Point[] points, int degree, BigInteger field) => 
+        LagrangeInterpolation(points, 0, degree) % field;
     
 
-    // Generates a random BigInteger value for each coefficient in an array where array[0] corresponds to x^1, array[1] to x^2 etc.
+    // Generates a random BigInteger value for each coefficient
     private BigInteger[] generateCoefficients(int degree, BigInteger field)
     {
         var arr = new BigInteger[degree];
