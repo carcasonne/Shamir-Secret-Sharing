@@ -9,3 +9,8 @@ dotnet run
 ```
 
 We have written the classes Polynomial, Point and an extension method for the BigInteger class which can be found in the Utilities project.
+
+## Different .NET versions
+
+It is possible to change the targeted version of .NET by modifying ShamirSecretSharing.csproj and Utilities.csproj to target whatever you have installed. 
+Though please note we have only tested the program on .NET 8.0.
